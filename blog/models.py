@@ -38,7 +38,10 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts"
     )
     category = models.ForeignKey(
-        Category, on_delete=models.PROTECT, verbose_name="category"
+        Category,
+        on_delete=models.PROTECT,
+        verbose_name="category",
+        related_name="posts",
     )
     date_posted = models.DateTimeField(auto_now=True)
 

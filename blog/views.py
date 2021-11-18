@@ -1,3 +1,4 @@
+from django.db.models.aggregates import Count
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 
@@ -10,7 +11,7 @@ class CategoryViewSet(ModelViewSet):
     """Viewset that provide CURD+L  on categories for admin user."""
 
     http_method_names = ["get", "post", "put", "delete", "head", "options"]
-    queryset = Category.objects.all()
+    queryset = Category.objects.annotate(total_posts=Count("posts")).all()
     serializer_class = CategorySerializer
 
     def get_permissions(self):
