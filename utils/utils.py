@@ -37,7 +37,7 @@ def get_avatar_image_path(instance, filename):
     from datetime import date
 
     ext = filename.split(".")[-1]
-    new_filename = f"{instance.username}.{ext}"
+    new_filename = f"{instance.user.username}.{ext}"
     today_path = date.today().strftime("%Y/%m/%d")
     image_path = f"profile-pics/{today_path}/{new_filename}"
     return image_path

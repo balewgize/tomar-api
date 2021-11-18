@@ -3,6 +3,7 @@ Django settings for tomar2 project.
 """
 import environ
 from pathlib import Path
+from datetime import timedelta
 
 # initialize environment variables
 env = environ.Env(DEBUG=(bool, False))
@@ -34,6 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "djoser",
+    "rest_framework_simplejwt",
     "blog",
     "bookmarks",
     "core",
@@ -134,3 +137,21 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core.User"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("JWT",),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
+}
+
+DJOSER = {
+    "SERIALIZERS": {
+        "current_user": "core.serializers.UserSerializer",
+    }
+}
