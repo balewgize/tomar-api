@@ -24,6 +24,10 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
+# for django-debug-toolabr
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -35,8 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "djoser",
     "rest_framework_simplejwt",
+    "djoser",
+    "debug_toolbar",
     "accounts",
     "blog",
     "bookmarks",
@@ -45,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
