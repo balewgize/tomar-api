@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "djoser",
     "rest_framework_simplejwt",
+    "accounts",
     "blog",
     "bookmarks",
-    "core",
     "likes",
     "tags",
 ]
@@ -136,7 +136,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "accounts.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -152,6 +152,6 @@ SIMPLE_JWT = {
 
 DJOSER = {
     "SERIALIZERS": {
-        "current_user": "core.serializers.UserSerializer",
+        "current_user": "accounts.serializers.UserSerializer",
     }
 }
