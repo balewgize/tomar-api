@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from .utils import get_unique_slug, get_post_image_path, get_compressed_image
+from utils import utils
 
 
 class Category(models.Model):
@@ -19,7 +19,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         # assing a unique slug from the title of a category
-        self.slug = get_unique_slug(self.__class__, self.title)
+        self.slug = utils.get_unique_slug(self.__class__, self.title)
         return super().save(*args, **kwargs)
 
 
@@ -29,8 +29,9 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     image = models.ImageField(
-        get_post_image_path,
-        help_text="Select an appropriate image for your post. Good images increase the chance of being read.",
+        upload_to=utils.get_post_image_path,
+        help_text="Select an appropriate image for your post."
+        "Good images increase the chance of being read.",
     )
     slug = models.SlugField(max_length=212, unique=True)
     user = models.ForeignKey(
@@ -46,8 +47,8 @@ class Post(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.image = get_compressed_image(self.image)
-        self.slug = get_unique_slug(self.__class__, self.title)
+        self.image = utils.get_compressed_image(self.image, size=(1200, 630))
+        self.slug = utils.get_unique_slug(self.__class__, self.title)
         return super().save(*args, **kwargs)
 
 
