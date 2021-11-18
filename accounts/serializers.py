@@ -21,3 +21,10 @@ class UserSerializer(BaseUserSerializer):
 
     class Meta(BaseUserSerializer.Meta):
         fields = ["id", "username", "email", "first_name", "last_name", "profile"]
+
+
+class SimpleUserSerializer(BaseUserSerializer):
+    """Expose few info about the user."""
+
+    class Meta(BaseUserSerializer.Meta):
+        fields = ["id", "username"]
